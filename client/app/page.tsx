@@ -22,12 +22,15 @@ const Home = () => {
   const [planets, setPlanets] = useState<PlanetData[]>([]);
   const [selectedPlanet, setSelectedPlanet] = useState<PlanetData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [simulationTime, setSimulationTime] = useState(0);
-  const [simulationDate, setSimulationDate] = useState<
+  const [simulationTime, setSimulationTime] = useState(0);  const [simulationDate, setSimulationDate] = useState<
     SimulationData["simulationDate"]
   >({
-    earthYears: 2023,
-    formattedDate: "January 1, 2023",
+    earthYears: new Date().getFullYear(),
+    formattedDate: new Date().toLocaleDateString('en-US', { 
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }),
   });
 
   const { toast } = useToast();

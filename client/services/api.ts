@@ -41,8 +41,12 @@ const mockSimulationData: SimulationData = {
   timeScale: 1,
   currentTime: 0,
   simulationDate: {
-    earthYears: 2023,
-    formattedDate: "January 1, 2023"
+    earthYears: new Date().getFullYear(),
+    formattedDate: new Date().toLocaleDateString('en-US', { 
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    })
   },
   celestialBodies: [
     {
@@ -230,8 +234,8 @@ const mockSimulationData: SimulationData = {
 // Function to calculate simulation date based on a specific year and date
 export const calculatePlanetPositions = (year: number, month: number, day: number): number => {
   // Calculate position of planets based on the date
-  // Using a base date of January 1, 2023
-  const baseDate = new Date(2023, 0, 1);
+  // Using current date as base date
+  const baseDate = new Date();
   const targetDate = new Date(year, month - 1, day);
   
   // Calculate days difference
@@ -244,8 +248,8 @@ export const calculatePlanetPositions = (year: number, month: number, day: numbe
 
 // Update simulation date for a given time
 const updateSimulationDate = (elapsedTime: number): SimulationData['simulationDate'] => {
-  // Start date: January 1, 2023
-  const startDate = new Date(2023, 0, 1);
+  // Start from current date
+  const startDate = new Date();
   
   // Convert simulation time to days (1 time unit = 20 days)
   const elapsedDays = elapsedTime * 20;
@@ -261,10 +265,8 @@ const updateSimulationDate = (elapsedTime: number): SimulationData['simulationDa
     day: 'numeric' 
   });
   
-  const earthYears = 2023 + (elapsedDays / 365.25);
-  
   return {
-    earthYears: Math.floor(earthYears),
+    earthYears: newDate.getFullYear(),
     formattedDate
   };
 };
