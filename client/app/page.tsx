@@ -1,12 +1,19 @@
-'use client';
-import React, { useState, useEffect } from 'react';
-import SolarSystem from '../components/SolarSystem';
-import ControlPanel from '../components/ControlPanel';
-import ApiDocumentation from '../components/ApiDocumentation';
-import { Button } from '@/components/ui/button';
-import { useToast } from '@/components/ui/use-toast';
-import { BookOpen, Github, Info, HelpCircle, Settings, LayoutDashboard } from 'lucide-react';
-import { apiService, PlanetData, SimulationData } from '../services/api';
+"use client";
+import React, { useState, useEffect } from "react";
+import SolarSystem from "../components/SolarSystem";
+import ControlPanel from "../components/ControlPanel";
+import ApiDocumentation from "../components/ApiDocumentation";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
+import {
+  BookOpen,
+  Github,
+  Info,
+  HelpCircle,
+  Settings,
+  LayoutDashboard,
+} from "lucide-react";
+import { apiService, PlanetData, SimulationData } from "../services/api";
 
 const Home = () => {
   const [isPlaying, setIsPlaying] = useState(true);
@@ -16,11 +23,13 @@ const Home = () => {
   const [selectedPlanet, setSelectedPlanet] = useState<PlanetData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [simulationTime, setSimulationTime] = useState(0);
-  const [simulationDate, setSimulationDate] = useState<SimulationData['simulationDate']>({
+  const [simulationDate, setSimulationDate] = useState<
+    SimulationData["simulationDate"]
+  >({
     earthYears: 2023,
-    formattedDate: "January 1, 2023"
+    formattedDate: "January 1, 2023",
   });
-  
+
   const { toast } = useToast();
 
   useEffect(() => {
@@ -67,7 +76,7 @@ const Home = () => {
       setSelectedPlanet(null);
       setSimulationTime(0);
       setSimulationDate(data.simulationDate);
-      
+
       toast({
         title: "Simulation Reset",
         description: "The solar system has been reset to its initial state",
@@ -105,7 +114,7 @@ const Home = () => {
   const handleTimeUpdate = (time: number) => {
     setSimulationTime(time);
   };
-  
+
   const handleDateChange = (time: number) => {
     setSimulationTime(time);
     // Temporarily pause simulation when directly setting a date
@@ -113,7 +122,7 @@ const Home = () => {
       setIsPlaying(false);
       setTimeout(() => setIsPlaying(true), 500); // Resume after a short delay
     }
-    
+
     toast({
       title: "Date Changed",
       description: "The simulation date has been updated",
@@ -123,10 +132,15 @@ const Home = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-screen bg-space-dark">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-xl text-white">Loading Solar System...</p>
+      <div className="flex items-center justify-center h-screen bg-[#0B1026]">
+        <div className="text-center relative">
+          <div className="w-20 h-20 border-4 border-blue-400/20 border-t-blue-500 rounded-full animate-spin mx-auto mb-6 shadow-lg shadow-blue-500/20"></div>
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="w-20 h-20 mx-auto rounded-full bg-blue-500/10 blur-xl"></div>
+          </div>
+          <p className="text-xl font-medium bg-gradient-to-r from-blue-200 to-indigo-200 bg-clip-text text-transparent">
+            Loading Solar System...
+          </p>
         </div>
       </div>
     );
@@ -134,59 +148,63 @@ const Home = () => {
 
   return (
     <div className="relative h-screen overflow-hidden bg-space-dark">
-      {/* Header with buttons */}
-      <header className="absolute top-0 left-0 z-10 p-4 flex items-center gap-2">
-        <div className="flex items-center bg-slate-800/70 backdrop-blur-xs rounded-lg px-3 py-1.5 border border-slate-700/50">
-          <LayoutDashboard size={18} className="text-blue-400 mr-2" />
-          <h1 className="text-white text-lg font-bold">Solar System Simulator</h1>
+      {" "}
+      <header className="absolute top-0 left-0 right-0 z-10 px-6 py-5 flex items-center gap-4">
+        <div className="flex items-center rounded-2xl px-5 py-5 border border-indigo-500/20 shadow-lg shadow-blue-500/10">
+          <h1 className="text-xl font-medium tracking-tight bg-gradient-to-r from-blue-200 to-indigo-200 bg-clip-text text-transparent">
+            Solar System Orbits
+          </h1>
         </div>
-        
-        <div className="flex gap-1 ml-2">
-          <Button 
-            variant="outline" 
+
+        <div className="flex gap-3">
+          <Button
+            variant="outline"
             size="sm"
-            className="bg-slate-800/70 hover:bg-slate-700/90 border-slate-600 flex items-center gap-2 backdrop-blur-xs"
+            className="bg-[#1B2A4A]/80 hover:bg-[#2A3B66]/90 border-indigo-500/20 text-blue-100 flex items-center gap-2.5 backdrop-blur-md shadow-lg shadow-blue-500/10 rounded-xl px-4 hover:border-indigo-500/40 transition-all duration-300"
             onClick={() => setShowDocs(true)}
           >
-            <BookOpen size={16} />
-            <span className="hidden sm:inline">API Docs</span>
+            <BookOpen size={16} />{" "}
+            <span className="hidden sm:inline font-medium">API Docs</span>
           </Button>
-          
-          <Button 
-            variant="outline" 
+
+          <Button
+            variant="outline"
             size="sm"
-            className="bg-slate-800/70 hover:bg-slate-700/90 border-slate-600 flex items-center gap-2 backdrop-blur-xs"
-            onClick={() => window.open('https://github.com/yourusername/solar-system-simulator', '_blank')}
+            className="bg-[#1B2A4A]/80 hover:bg-[#2A3B66]/90 border-indigo-500/20 text-blue-100 flex items-center gap-2.5 backdrop-blur-md shadow-lg shadow-blue-500/10 rounded-xl px-4 hover:border-indigo-500/40 transition-all duration-300"
+            onClick={() =>
+              window.open(
+                "https://github.com/yourusername/solar-system-simulator",
+                "_blank"
+              )
+            }
           >
-            <Github size={16} />
-            <span className="hidden sm:inline">GitHub</span>
+            <Github size={16} className="text-blue-300" />
+            <span className="hidden sm:inline font-medium">GitHub</span>
           </Button>
-          
-          <Button 
-            variant="outline" 
+
+          <Button
+            variant="outline"
             size="sm"
-            className="bg-slate-800/70 hover:bg-slate-700/90 border-slate-600 flex items-center gap-2 backdrop-blur-xs"
+            className="bg-[#1B2A4A]/80 hover:bg-[#2A3B66]/90 border-indigo-500/20 text-blue-100 flex items-center gap-2.5 backdrop-blur-md shadow-lg shadow-blue-500/10 rounded-xl px-4 hover:border-indigo-500/40 transition-all duration-300"
           >
-            <HelpCircle size={16} />
-            <span className="hidden sm:inline">Help</span>
+            <HelpCircle size={16} className="text-blue-300" />
+            <span className="hidden sm:inline font-medium">Help</span>
           </Button>
         </div>
       </header>
-
       {/* Main 3D simulation canvas */}
       <main className="h-full w-full">
-        <SolarSystem 
-          planets={planets} 
-          isPlaying={isPlaying} 
-          timeScale={timeScale} 
+        <SolarSystem
+          planets={planets}
+          isPlaying={isPlaying}
+          timeScale={timeScale}
           onPlanetSelect={handlePlanetSelect}
           onTimeUpdate={handleTimeUpdate}
           simulationTime={simulationTime}
         />
       </main>
-
       {/* Control panel */}
-      <ControlPanel 
+      <ControlPanel
         isPlaying={isPlaying}
         timeScale={timeScale}
         selectedPlanet={selectedPlanet}
@@ -197,12 +215,8 @@ const Home = () => {
         onCloseInfo={() => setSelectedPlanet(null)}
         onDateChange={handleDateChange}
       />
-
       {/* API Documentation modal */}
-      <ApiDocumentation 
-        isOpen={showDocs} 
-        onClose={() => setShowDocs(false)} 
-      />
+      <ApiDocumentation isOpen={showDocs} onClose={() => setShowDocs(false)} />
     </div>
   );
 };
