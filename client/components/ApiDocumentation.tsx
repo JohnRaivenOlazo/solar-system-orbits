@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ChevronRight, Code, X } from 'lucide-react';
@@ -27,8 +26,8 @@ const ApiDocumentation: React.FC<ApiDocumentationProps> = ({ isOpen, onClose }) 
           <section className="space-y-4">
             <h3 className="text-lg font-semibold text-white">Overview</h3>
             <p className="text-slate-300">
-              This application connects to a Flask API that simulates the solar system. 
-              The frontend visualizes the data provided by the backend.
+              This application uses a Python Flask backend API deployed separately from the frontend. 
+              The frontend visualizes the solar system simulation data provided by the backend.
             </p>
           </section>
 
@@ -39,7 +38,7 @@ const ApiDocumentation: React.FC<ApiDocumentationProps> = ({ isOpen, onClose }) 
               <div className="border border-slate-700 rounded-md overflow-hidden">
                 <div className="bg-slate-800 p-3 flex items-center">
                   <span className="px-2 py-1 bg-green-700 text-xs rounded-md mr-3">GET</span>
-                  <code className="text-green-400">/api/solar-system/simulation</code>
+                  <code className="text-green-400">/simulation</code>
                 </div>
                 <div className="p-4 bg-slate-900">
                   <p className="text-slate-300 mb-2">Returns the current state of the simulation, including the positions of all celestial bodies.</p>
@@ -80,7 +79,7 @@ const ApiDocumentation: React.FC<ApiDocumentationProps> = ({ isOpen, onClose }) 
               <div className="border border-slate-700 rounded-md overflow-hidden">
                 <div className="bg-slate-800 p-3 flex items-center">
                   <span className="px-2 py-1 bg-blue-700 text-xs rounded-md mr-3">POST</span>
-                  <code className="text-blue-400">/api/solar-system/simulation/settings</code>
+                  <code className="text-blue-400">/simulation/settings</code>
                 </div>
                 <div className="p-4 bg-slate-900">
                   <p className="text-slate-300 mb-2">Updates simulation parameters like time scale.</p>
@@ -96,7 +95,7 @@ const ApiDocumentation: React.FC<ApiDocumentationProps> = ({ isOpen, onClose }) 
               <div className="border border-slate-700 rounded-md overflow-hidden">
                 <div className="bg-slate-800 p-3 flex items-center">
                   <span className="px-2 py-1 bg-blue-700 text-xs rounded-md mr-3">POST</span>
-                  <code className="text-blue-400">/api/solar-system/simulation/reset</code>
+                  <code className="text-blue-400">/simulation/reset</code>
                 </div>
                 <div className="p-4 bg-slate-900">
                   <p className="text-slate-300">Resets the simulation to its initial state.</p>
@@ -110,12 +109,13 @@ const ApiDocumentation: React.FC<ApiDocumentationProps> = ({ isOpen, onClose }) 
             <pre className="bg-slate-800 p-4 rounded-md overflow-auto text-xs text-slate-300">
 {`import axios from 'axios';
 
-const API_BASE_URL = 'https://your-flask-api.com/api';
+// The backend is deployed separately from the frontend
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
 export const fetchSimulationData = async () => {
   try {
     const response = await axios.get(
-      \`\${API_BASE_URL}/solar-system/simulation\`
+      \`\${API_BASE_URL}/simulation\`
     );
     return response.data;
   } catch (error) {
@@ -127,7 +127,7 @@ export const fetchSimulationData = async () => {
 export const updateSimulation = async (timeScale) => {
   try {
     await axios.post(
-      \`\${API_BASE_URL}/solar-system/simulation/settings\`, 
+      \`\${API_BASE_URL}/simulation/settings\`, 
       { timeScale }
     );
   } catch (error) {
@@ -138,7 +138,7 @@ export const updateSimulation = async (timeScale) => {
 
 export const resetSimulation = async () => {
   try {
-    await axios.post(\`\${API_BASE_URL}/solar-system/simulation/reset\`);
+    await axios.post(\`\${API_BASE_URL}/simulation/reset\`);
   } catch (error) {
     console.error('Failed to reset simulation:', error);
     throw error;
