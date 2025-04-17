@@ -10,7 +10,9 @@ app = Flask(__name__)
 # Configure CORS with your frontend domain
 CORS(app, resources={r"/*": {"origins": [
     "http://localhost:3000",
-    "https://solar-system-orbits.vercel.app"
+    "https://solar-system-orbits.vercel.app",
+    "https://solar-system-orbits-boo71bn6t-johnraivenolazos-projects.vercel.app",
+    "https://solar-system-orbits-git-main-johnraivenolazos-projects.vercel.app"
 ]}})
 
 # Configuration for planetary visualization
