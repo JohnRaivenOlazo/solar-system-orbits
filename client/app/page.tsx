@@ -8,10 +8,7 @@ import { useToast } from "@/components/ui/use-toast";
 import {
   BookOpen,
   Github,
-  Info,
   HelpCircle,
-  Settings,
-  LayoutDashboard,
 } from "lucide-react";
 import { apiService, PlanetData, SimulationData } from "../services/api";
 
@@ -176,22 +173,13 @@ const Home = () => {
             className="bg-[#1B2A4A]/80 hover:bg-[#2A3B66]/90 border-indigo-500/20 text-blue-100 flex items-center gap-2.5 backdrop-blur-md shadow-lg shadow-blue-500/10 rounded-xl px-4 hover:border-indigo-500/40 transition-all duration-300"
             onClick={() =>
               window.open(
-                "https://github.com/yourusername/solar-system-simulator",
+                "https://github.com/JohnRaivenOlazo/solar-system-orbits",
                 "_blank"
               )
             }
           >
             <Github size={16} className="text-blue-300" />
             <span className="hidden sm:inline font-medium">GitHub</span>
-          </Button>
-
-          <Button
-            variant="outline"
-            size="sm"
-            className="bg-[#1B2A4A]/80 hover:bg-[#2A3B66]/90 border-indigo-500/20 text-blue-100 flex items-center gap-2.5 backdrop-blur-md shadow-lg shadow-blue-500/10 rounded-xl px-4 hover:border-indigo-500/40 transition-all duration-300"
-          >
-            <HelpCircle size={16} className="text-blue-300" />
-            <span className="hidden sm:inline font-medium">Help</span>
           </Button>
         </div>
       </header>
