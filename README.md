@@ -4,8 +4,8 @@
 [![React](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
 [![Three.js](https://img.shields.io/badge/Three.js-0.175.0-black?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
 [![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![Flask](https://img.shields.io/badge/Flask-Latest-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-Latest-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
 An interactive 3D visualization of our solar system, built with modern web technologies. Experience the beauty of planetary motion and explore the celestial bodies in our cosmic neighborhood.
 
@@ -45,25 +45,25 @@ An interactive 3D visualization of our solar system, built with modern web techn
 
 ### Development Setup
 
-1. Clone the repository:
-\`\`\`bash
+1. Clone the repository:dd
+```bash
 git clone https://github.com/yourusername/solar-system-orbits.git
 cd solar-system-orbits
-\`\`\`
+```
 
 2. Frontend Setup:
-\`\`\`bash
+```bash
 cd client
 pnpm install
 pnpm dev
-\`\`\`
+```
 
 3. Backend Setup:
-\`\`\`bash
+```bash
 cd server
 pip install -r requirements.txt
 python index.py
-\`\`\`
+```
 
 The development server will be running at:
 - Frontend: http://localhost:3000
@@ -83,11 +83,15 @@ The project is deployed on Vercel:
 
 ## 📱 Environment Variables
 
-Frontend (.env.local):
-\`\`\`
-NEXT_PUBLIC_API_URL=http://localhost:5000 # Development
-NEXT_PUBLIC_API_URL=https://solar-system-orbits.api.vercel.app # Production
-\`\`\`
+Create a `.env.local` file in the client directory:
+
+```
+# Development
+NEXT_PUBLIC_API_URL=http://localhost:5000
+
+# Production
+# NEXT_PUBLIC_API_URL=https://solar-system-orbits-api.vercel.app
+```
 
 ## 📄 License
 
