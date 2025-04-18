@@ -1,11 +1,12 @@
 # 🌌 Solar System Orbits
 
-[![Next.js](https://img.shields.io/badge/Next.js-15.2.4-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
-[![Three.js](https://img.shields.io/badge/Three.js-0.175.0-black?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
-[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
 [![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![Three.js](https://img.shields.io/badge/Three.js-black?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
 An interactive 3D visualization of our solar system, built with modern web technologies. Experience the beauty of planetary motion and explore the celestial bodies in our cosmic neighborhood.
 
@@ -22,9 +23,9 @@ An interactive 3D visualization of our solar system, built with modern web techn
 ## 🛠️ Tech Stack
 
 ### Frontend
-- Next.js 15.2.4
-- React 18.3.1
-- Three.js 0.175.0
+- Next.js
+- React
+- Three.js
 - TypeScript
 - Tailwind CSS
 - Radix UI Components
@@ -39,13 +40,13 @@ An interactive 3D visualization of our solar system, built with modern web techn
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (18.18.0 or higher)
-- Python 3.8+
+- Node.js
+- Python
 - pnpm (recommended) or npm
 
 ### Development Setup
 
-1. Clone the repository:dd
+1. Clone the repository:
 ```bash
 git clone https://github.com/yourusername/solar-system-orbits.git
 cd solar-system-orbits
