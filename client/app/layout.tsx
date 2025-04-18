@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Solar System Simulator",
+  title: "Solar System Orbits",
   description: "Interactive 3D Solar System Simulation",
 };
 

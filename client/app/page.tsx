@@ -149,18 +149,12 @@ const Home = () => {
   return (
     <div className="relative h-screen overflow-hidden bg-space-dark">
       {" "}
-      <header className="absolute top-0 left-0 right-0 z-10 px-6 py-5 flex items-center gap-4">
-        <div className="flex items-center rounded-2xl px-5 py-5 border border-indigo-500/20 shadow-lg shadow-blue-500/10">
-          <h1 className="text-xl font-medium tracking-tight bg-gradient-to-r from-blue-200 to-indigo-200 bg-clip-text text-transparent">
-            Solar System Orbits
-          </h1>
-        </div>
-
+      <header className="absolute top-2 left-2 right-2 z-10 px-6 py-5 flex items-center gap-4">
         <div className="flex gap-3">
           <Button
             variant="outline"
             size="sm"
-            className="bg-[#1B2A4A]/80 hover:bg-[#2A3B66]/90 border-indigo-500/20 text-blue-100 flex items-center gap-2.5 backdrop-blur-md shadow-lg shadow-blue-500/10 rounded-xl px-4 hover:border-indigo-500/40 transition-all duration-300"
+            className="bg-[#1B2A4A]/80 hover:bg-[#2A3B66]/90 border-indigo-500/20 text-blue-100 flex items-center gap-1 backdrop-blur-md shadow-lg shadow-blue-500/10 rounded-xl px-4 hover:border-indigo-500/40 transition-all duration-300"
             onClick={() => setShowDocs(true)}
           >
             <BookOpen size={16} />{" "}
@@ -170,7 +164,7 @@ const Home = () => {
           <Button
             variant="outline"
             size="sm"
-            className="bg-[#1B2A4A]/80 hover:bg-[#2A3B66]/90 border-indigo-500/20 text-blue-100 flex items-center gap-2.5 backdrop-blur-md shadow-lg shadow-blue-500/10 rounded-xl px-4 hover:border-indigo-500/40 transition-all duration-300"
+            className="bg-[#1B2A4A]/80 hover:bg-[#2A3B66]/90 border-indigo-500/20 text-blue-100 flex items-center gap-1 backdrop-blur-md shadow-lg shadow-blue-500/10 rounded-xl px-20 hover:border-indigo-500/40 transition-all duration-300"
             onClick={() =>
               window.open(
                 "https://github.com/JohnRaivenOlazo/solar-system-orbits",
