@@ -4,6 +4,12 @@ import { useGLTF, useAnimations } from '@react-three/drei';
 import * as THREE from 'three';
 import { PlanetData } from '../../services/api';
 
+type GLTFResult = {
+  nodes: Record<string, THREE.Mesh>;
+  materials: Record<string, THREE.Material>;
+  animations: THREE.AnimationClip[];
+};
+
 interface SunProps {
   data: PlanetData;
   scale: number;
@@ -11,7 +17,7 @@ interface SunProps {
 
 export const Sun: React.FC<SunProps> = ({ data, scale }) => {
   const group = useRef<THREE.Group>(null);
-  const { nodes, materials, animations } = useGLTF('/models/sun.glb');
+  const { nodes, materials, animations } = useGLTF('/models/sun.glb') as unknown as GLTFResult;
   const { actions } = useAnimations(animations, group);
 
   useFrame(() => {
@@ -31,7 +37,7 @@ export const Sun: React.FC<SunProps> = ({ data, scale }) => {
                   <mesh
                     castShadow
                     receiveShadow
-                    geometry={nodes.UnstableStarCore_1_0.geometry}
+                    geometry={nodes['UnstableStarCore_1_0'].geometry}
                     material={materials.material}
                   />
                 </group>
@@ -39,7 +45,7 @@ export const Sun: React.FC<SunProps> = ({ data, scale }) => {
                   <mesh
                     castShadow
                     receiveShadow
-                    geometry={nodes.UnstableStarref_2_0.geometry}
+                    geometry={nodes['UnstableStarref_2_0'].geometry}
                     material={materials.material_1}
                   />
                 </group>
@@ -51,6 +57,7 @@ export const Sun: React.FC<SunProps> = ({ data, scale }) => {
       <pointLight color="#FFF" intensity={1.5} distance={300} decay={0} />
     </group>
   );
+
 };
 
 useGLTF.preload('/models/sun.glb');

@@ -86,17 +86,17 @@ export const Planet: React.FC<PlanetProps> = ({
           >
             <div 
               className={`
-                px-2 py-1 text-xs text-white whitespace-nowrap 
-                ${selected ? 'bg-accent/80' : 'bg-black/70'} 
+                px-2 py-1 text-xs whitespace-nowrap cursor-pointer
+                ${selected ? 'bg-accent text-accent-foreground' : 'bg-black/70 text-white'} 
                 rounded-md transform-gpu transition-all duration-200
                 ${hovered ? 'scale-125' : ''}
               `}
               style={{ 
                 maxWidth: '120px',
                 overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                pointerEvents: 'none'
+                textOverflow: 'ellipsis'
               }}
+              onClick={onClick}
             >
               {data.name}
             </div>

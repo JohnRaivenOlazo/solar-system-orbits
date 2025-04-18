@@ -49,7 +49,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
   };
 
   return (
-    <div className="control-panel fixed md:right-4 md:top-4 md:w-[350px] md:h-auto md:max-h-[calc(100vh-2rem)] md:overflow-y-auto bottom-0 right-0 right-0 p-4 z-10 pointer-events-none">
+    <div className="control-panel fixed md:right-4 md:top-4 md:w-[350px] md:h-auto md:max-h-[calc(100vh-2rem)] md:overflow-y-auto bottom-0 right-0 p-4 z-10 pointer-events-none">
       <div className="space-y-4 pointer-events-auto">
         {/* Time and date display */}
         {simulationDate && (
