@@ -33,12 +33,11 @@ export const Planet: React.FC<PlanetProps> = ({
   
   useFrame(() => {
     if (planetRef.current && planetBodyRef.current) {
-      // Self rotation - scaled with orbital speed
-      planetBodyRef.current.rotation.y += data.rotation * 0.01;
+      // Enhance rotation speed
+      planetBodyRef.current.rotation.y = time * data.rotation * Math.PI * 2;
       
-      // Orbital movement - improved speed scaling
-      const baseSpeed = data.orbitalSpeed * 2;  // Increase base speed
-      const angle = (time * baseSpeed) % (Math.PI * 2);
+      // Enhance orbital movement speed
+      const angle = time * data.orbitalSpeed * 2;
       const x = Math.cos(angle) * data.orbitalDistance;
       const z = Math.sin(angle) * data.orbitalDistance;
       

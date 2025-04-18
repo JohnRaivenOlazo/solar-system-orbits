@@ -1,5 +1,5 @@
-import React, { useState, useEffect, Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
+import React, { useState, useEffect, Suspense, useRef } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Stars, Html } from '@react-three/drei';
 import { PlanetData } from '../services/api';
 import { Sun } from './solar-system/Sun';
@@ -35,7 +35,17 @@ class ThreeJSErrorBoundary extends React.Component<{ children: React.ReactNode }
 
 const LoadingScreen = () => (
   <Html center>
-    <div className="text-white text-lg">Loading solar system...</div>
+    <div className="text-center">
+      <div className="relative flex justify-center items-center">
+        <div className="w-20 h-20 border-4 border-blue-400/20 border-t-blue-500 rounded-full animate-spin shadow-lg shadow-blue-500/20"></div>
+        <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+          <div className="w-20 h-20 rounded-full bg-blue-500/10 blur-xl"></div>
+        </div>
+      </div>
+      <p className="text-xl font-medium bg-gradient-to-r from-blue-200 to-indigo-200 bg-clip-text text-transparent mt-6">
+        Loading Solar System...
+      </p>
+    </div>
   </Html>
 );
 
@@ -61,33 +71,27 @@ const Scene: React.FC<SceneProps> = ({
   simulationTime
 }) => {
   const [time, setTime] = useState(simulationTime);
+  const timeRef = useRef(simulationTime);
   const sceneScale = 0.2;
   
   const sun = planets.find(planet => planet.id === "sun");
   const otherPlanets = planets.filter(planet => planet.id !== "sun");
 
-  useEffect(() => {
+  useFrame((state) => {
     if (!isPlaying) return;
     
-    let lastTime = performance.now();
-    const animate = () => {
-      const currentTime = performance.now();
-      const deltaTime = (currentTime - lastTime) / 1000; // Convert to seconds
-      
-      // Apply an exponential scale factor for better response at higher speeds
-      const scaledTime = time + (deltaTime * Math.pow(timeScale, 1.5));
-      
-      setTime(scaledTime);
-      onTimeUpdate(scaledTime);
-      lastTime = currentTime;
-    };
+    // Apply exponential scaling for more dramatic speed increases
+    const scaleFactor = Math.pow(2, timeScale - 1);
+    const newTime = timeRef.current + (state.clock.getDelta() * scaleFactor);
+    timeRef.current = newTime;
+    setTime(newTime);
+    onTimeUpdate(newTime);
+  });
 
-    const interval = setInterval(animate, 1000 / 60); // 60 FPS
-    return () => clearInterval(interval);
-  }, [isPlaying, timeScale, time, onTimeUpdate]);
-
+  // Sync with external time changes
   useEffect(() => {
-    if (simulationTime !== time) {
+    if (Math.abs(simulationTime - timeRef.current) > 0.001) {
+      timeRef.current = simulationTime;
       setTime(simulationTime);
     }
   }, [simulationTime]);
