@@ -80,12 +80,17 @@ const Scene: React.FC<SceneProps> = ({
   useFrame((state) => {
     if (!isPlaying) return;
     
-    // Apply exponential scaling for more dramatic speed increases
-    const scaleFactor = Math.pow(2, timeScale - 1);
-    const newTime = timeRef.current + (state.clock.getDelta() * scaleFactor);
-    timeRef.current = newTime;
-    setTime(newTime);
-    onTimeUpdate(newTime);
+    // Apply exponential scaling with a safety limit
+    const maxScaleFactor = 1000; // Prevent extreme time scaling
+    const scaleFactor = Math.min(Math.pow(2, (timeScale - 1) / 2), maxScaleFactor);
+    const deltaTime = state.clock.getDelta();
+    const newTime = timeRef.current + (deltaTime * scaleFactor);
+    
+    // Prevent potential overflow by capping the maximum simulation time
+    const maxTime = Number.MAX_SAFE_INTEGER / 1000; // Leave room for calculations
+    timeRef.current = Math.min(newTime, maxTime);
+    setTime(timeRef.current);
+    onTimeUpdate(timeRef.current);
   });
 
   // Sync with external time changes
@@ -98,7 +103,7 @@ const Scene: React.FC<SceneProps> = ({
 
   return (
     <group scale={sceneScale}>
-      {sun && <Sun data={sun} scale={1} />}
+      {sun && <Sun data={sun} scale={0.2} />}
       
       {otherPlanets.map((planet) => (
         <Planet 

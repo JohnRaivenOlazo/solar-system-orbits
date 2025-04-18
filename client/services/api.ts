@@ -45,21 +45,39 @@ export const calculatePlanetPositions = (year: number, month: number, day: numbe
 
 // Update simulation date for a given time
 const updateSimulationDate = (elapsedTime: number): SimulationData['simulationDate'] => {
-  const startDate = new Date();
-  const elapsedDays = elapsedTime * 20;
-  const newDate = new Date(startDate);
-  newDate.setDate(startDate.getDate() + elapsedDays);
-  
-  const formattedDate = newDate.toLocaleDateString('en-US', { 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
-  });
-  
-  return {
-    earthYears: newDate.getFullYear(),
-    formattedDate
-  };
+  try {
+    const millisecondsPerDay = 24 * 60 * 60 * 1000;
+    const daysElapsed = elapsedTime * 20; // Each unit represents 20 days
+    const startDate = new Date();
+    
+    // Handle very large numbers by chunking the calculation
+    let newDate = new Date(startDate);
+    const safeChunkSize = 365 * 100; // Process 100 years at a time
+    let remainingDays = daysElapsed;
+    
+    while (remainingDays > 0) {
+      const chunk = Math.min(remainingDays, safeChunkSize);
+      newDate = new Date(newDate.getTime() + (chunk * millisecondsPerDay));
+      remainingDays -= chunk;
+    }
+    
+    const formattedDate = newDate.toLocaleDateString('en-US', { 
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+    
+    return {
+      earthYears: newDate.getFullYear(),
+      formattedDate: formattedDate
+    };
+  } catch (error) {
+    // Fallback for any date calculation errors
+    return {
+      earthYears: 0,
+      formattedDate: 'Date calculation error'
+    };
+  }
 };
 
 // API service

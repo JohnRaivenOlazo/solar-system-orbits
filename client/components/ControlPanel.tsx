@@ -166,11 +166,26 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
               <Slider 
                 value={[timeScale]} 
                 min={0.1} 
-                max={20}
+                max={1000}
                 step={0.1} 
                 onValueChange={(values) => onTimeScaleChange(values[0])}
                 className="mt-1"
               />
+              <div className="text-xs text-gray-400 mt-1">
+                {timeScale < 1 ? (
+                  // Less than 1 day per second
+                  `${timeScale.toFixed(1)} days per second`
+                ) : timeScale < 30 ? (
+                  // 1-30 days per second
+                  `${timeScale.toFixed(1)} days per second (${(timeScale/365).toFixed(3)} years/sec)`
+                ) : timeScale < 365 ? (
+                  // 1-12 months per second
+                  `${(timeScale/30).toFixed(1)} months per second (${(timeScale/365).toFixed(2)} years/sec)`
+                ) : (
+                  // Years per second
+                  `${(timeScale/365).toFixed(1)} years per second`
+                )}
+              </div>
             </div>
           </CardContent>
         </Card>

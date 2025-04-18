@@ -33,13 +33,16 @@ export const Planet: React.FC<PlanetProps> = ({
   
   useFrame(() => {
     if (planetRef.current && planetBodyRef.current) {
-      // Enhance rotation speed
-      planetBodyRef.current.rotation.y = time * data.rotation * Math.PI * 2;
-      
-      // Enhance orbital movement speed
-      const angle = time * data.orbitalSpeed * 2;
-      const x = Math.cos(angle) * data.orbitalDistance;
-      const z = Math.sin(angle) * data.orbitalDistance;
+      // Scale rotations to be more visible while maintaining relative accuracy
+      // We multiply rotation speed by a factor to make it more visible
+      const rotationSpeed = data.rotation * 100000; // Make rotations more visible
+      planetBodyRef.current.rotation.y += rotationSpeed;
+
+      // Calculate orbital position
+      // time is in simulation years, multiply by orbital speed for position
+      const orbitalAngle = time * data.orbitalSpeed * Math.PI * 2;
+      const x = Math.cos(orbitalAngle) * data.orbitalDistance;
+      const z = Math.sin(orbitalAngle) * data.orbitalDistance;
       
       planetRef.current.position.x = x;
       planetRef.current.position.z = z;

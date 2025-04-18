@@ -21,7 +21,7 @@ BASE_COLORS = {
     'sun': '#FDB813',     # Yellow
     'mercury': '#A0522D', # Brown
     'venus': '#DEB887',   # Beige
-    'earth': '#6B8E23',   # Green
+    'earth': '#4B6EA9',   # Blue
     'mars': '#CD5C5C',    # Red
     'jupiter': '#DAA520', # Golden
     'saturn': '#F4D03F',  # Light yellow
@@ -53,16 +53,30 @@ ORBITAL_DISTANCES = {
     'neptune': 301
 }
 
+# Orbital speeds in orbits per year
 ORBITAL_SPEEDS = {
     'sun': 0,
-    'mercury': 0.04,
-    'venus': 0.035,
-    'earth': 0.03,
-    'mars': 0.024,
-    'jupiter': 0.013,
-    'saturn': 0.009,
-    'uranus': 0.006,
-    'neptune': 0.005
+    'mercury': 4.15,    # 365.25/88 days = 4.15 orbits per year
+    'venus': 1.62,      # 365.25/225 days = 1.62 orbits per year
+    'earth': 1.0,       # 1 orbit per year
+    'mars': 0.53,       # 365.25/687 days = 0.53 orbits per year
+    'jupiter': 0.084,   # 1/11.86 years = 0.084 orbits per year
+    'saturn': 0.034,    # 1/29.46 years = 0.034 orbits per year
+    'uranus': 0.012,    # 1/84.01 years = 0.012 orbits per year
+    'neptune': 0.006    # 1/164.79 years = 0.006 orbits per year
+}
+
+# Rotation speeds in radians per second
+ROTATION_SPEEDS = {
+    'sun': 2.7e-6,     # ~27 Earth days per rotation
+    'mercury': 1.24e-6, # ~59 Earth days per rotation
+    'venus': -2.99e-7,  # ~243 Earth days per rotation (negative for retrograde)
+    'earth': 7.27e-5,   # 24 hours per rotation
+    'mars': 7.09e-5,    # 24.6 hours per rotation
+    'jupiter': 1.76e-4, # ~10 hours per rotation
+    'saturn': 1.63e-4,  # ~10.7 hours per rotation
+    'uranus': 1.01e-4,  # ~17 hours per rotation
+    'neptune': 1.09e-4  # ~16 hours per rotation
 }
 
 PLANET_INFO = {
@@ -171,7 +185,7 @@ def get_simulation_data():
             'id': planet_id,
             'name': planet_id.capitalize(),
             'position': [x, y, z],
-            'rotation': ORBITAL_SPEEDS[planet_id] * 2,  # Rotation speed
+            'rotation': ROTATION_SPEEDS[planet_id],  # Rotation speed
             'radius': PLANET_RADII[planet_id],
             'color': BASE_COLORS[planet_id],
             'orbitalSpeed': ORBITAL_SPEEDS[planet_id],
