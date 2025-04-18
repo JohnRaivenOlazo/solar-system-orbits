@@ -28,7 +28,7 @@ An interactive 3D visualization of our solar system, built with modern web techn
 - Three.js
 - TypeScript
 - Tailwind CSS
-- Radix UI Components
+- ShadCN UI
 - React Three Fiber
 
 ### Backend
