@@ -5,8 +5,14 @@ import * as THREE from 'three';
 import { PlanetData } from '../../services/api';
 
 type GLTFResult = {
-  nodes: Record<string, THREE.Mesh>;
-  materials: Record<string, THREE.Material>;
+  nodes: {
+    UnstableStarCore_1_0: THREE.Mesh;
+    UnstableStarref_2_0: THREE.Mesh;
+  };
+  materials: {
+    material: THREE.Material;
+    material_1: THREE.Material;
+  };
   animations: THREE.AnimationClip[];
 };
 
