@@ -115,19 +115,32 @@ const Home = () => {
     setSimulationTime(time);
   };
 
-  const handleDateChange = (time: number) => {
-    setSimulationTime(time);
-    // Temporarily pause simulation when directly setting a date
+  const handleDateChange = async (time: number) => {
+    // First pause the simulation if it's running
     if (isPlaying) {
       setIsPlaying(false);
-      setTimeout(() => setIsPlaying(true), 500); // Resume after a short delay
     }
+    
+    // Update the simulation time
+    setSimulationTime(time);
+    
+    // Wait for a tick to ensure state is updated
+    await new Promise(resolve => setTimeout(resolve, 0));
+    
+    // Update the simulation date
+    const date = apiService.getSimulationDate(time);
+    setSimulationDate(date);
 
     toast({
       title: "Date Changed",
       description: "The simulation date has been updated",
       duration: 2000,
     });
+
+    // Resume simulation after a short delay if it was playing
+    if (isPlaying) {
+      setTimeout(() => setIsPlaying(true), 500);
+    }
   };
 
   if (isLoading) {

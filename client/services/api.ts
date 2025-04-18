@@ -21,6 +21,11 @@ export interface PlanetData {
     description: string;
     temperature?: string;
     moons?: number;
+    perihelionDates?: Array<{
+      date: string;
+      distance: string;
+      description: string;
+    }>;
   };
 }
 

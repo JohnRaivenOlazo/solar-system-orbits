@@ -114,7 +114,59 @@ PLANET_INFO = {
         'yearLength': '365.25 days',
         'description': 'Earth is the third planet from the Sun and the only astronomical object known to harbor life.',
         'temperature': '15°C (average)',
-        'moons': 1
+        'moons': 1,
+        'perihelionDates': [
+            {
+                'date': 'January 2, 2025',
+                'distance': '147,098,238 km',
+                'description': 'During this perihelion, Earth reaches one of its closest points to the Sun, experiencing slightly stronger solar radiation.'
+            },
+            {
+                'date': 'January 3, 2024',
+                'distance': '147,098,925 km',
+                'description': 'Earth passes through perihelion shortly after New Year, when the Northern Hemisphere is in winter.'
+            },
+            {
+                'date': 'January 4, 2023',
+                'distance': '147,098,960 km',
+                'description': 'This perihelion occurs during the Southern Hemisphere\'s summer, with maximum solar energy received.'
+            },
+            {
+                'date': 'January 4, 2022',
+                'distance': '147,105,052 km',
+                'description': 'A typical perihelion passage, demonstrating Earth\'s elliptical orbit around the Sun.'
+            },
+            {
+                'date': 'January 2, 2021',
+                'distance': '147,093,162 km',
+                'description': 'One of the closer perihelion approaches in recent years, bringing Earth notably near to the Sun.'
+            },
+            {
+                'date': 'January 5, 2020',
+                'distance': '147,091,144 km',
+                'description': 'The closest perihelion of the decade, occurring during a leap year.'
+            },
+            {
+                'date': 'January 3, 2019',
+                'distance': '147,099,761 km',
+                'description': 'A standard perihelion showing Earth\'s regular orbital patterns around the Sun.'
+            },
+            {
+                'date': 'January 3, 2018',
+                'distance': '147,097,233 km',
+                'description': 'Earth reaches its annual closest approach to the Sun, affecting tides and solar radiation slightly.'
+            },
+            {
+                'date': 'January 4, 2017',
+                'distance': '147,100,998 km',
+                'description': 'This perihelion demonstrates the minimal variation in Earth\'s closest approach to the Sun.'
+            },
+            {
+                'date': 'January 2, 2016',
+                'distance': '147,100,176 km',
+                'description': 'A leap year perihelion, showing the consistency of Earth\'s orbital mechanics.'
+            }
+        ]
     },
     'mars': {
         'mass': '6.39 × 10^23 kg',

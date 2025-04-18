@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
-import { PauseIcon, PlayIcon, RefreshCw, Info, Calendar, Clock, Globe, ChevronDown, ChevronUp } from 'lucide-react';
+import { PauseIcon, PlayIcon, RefreshCw, Info, Calendar, Clock, Globe, ChevronDown, ChevronUp, X } from 'lucide-react';
 import { PlanetData, SimulationData, calculatePlanetPositions } from '../services/api';
 import {
   Table,
@@ -13,6 +13,13 @@ import {
 } from "@/components/ui/table";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface ControlPanelProps {
   isPlaying: boolean;
@@ -192,90 +199,90 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
 
         {/* Planet information panel */}
         {selectedPlanet && (
-          <Card className="bg-white/10 border-white/20 shadow-lg animate-fade-in">
-            <CardHeader className="pb-2">
-              <div className="flex justify-between items-center">
-                <CardTitle className="text-lg flex items-center gap-2 text-white">
-                  <div 
-                    className="w-3 h-3 rounded-full" 
-                    style={{ backgroundColor: selectedPlanet.color }} 
-                  />
-                  {selectedPlanet.name}
-                </CardTitle>
-                <Button variant="ghost" size="icon" onClick={onCloseInfo} className="h-7 w-7 text-white hover:bg-white/20">
-                  <span className="sr-only">Close</span>
-                  <span aria-hidden className="text-lg">×</span>
-                </Button>
-              </div>
-              <CardDescription className="text-gray-200">
-                {selectedPlanet.info.description}
-              </CardDescription>
-            </CardHeader>
-            
-            <CardContent className="pb-3">
-              <Tabs defaultValue="physical" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 bg-white/10">
-                  <TabsTrigger value="physical" className="text-white data-[state=active]:bg-white/20">Physical Data</TabsTrigger>
-                  <TabsTrigger value="orbital" className="text-white data-[state=active]:bg-white/20">Orbital Data</TabsTrigger>
-                </TabsList>
-                <TabsContent value="physical" className="pt-2">
-                  <Table>
-                    <TableBody>
-                      {selectedPlanet.info.mass && (
-                        <TableRow>
-                          <TableCell className="py-1 text-gray-300 text-xs">Mass</TableCell>
-                          <TableCell className="py-1 font-mono text-sm text-white">{selectedPlanet.info.mass}</TableCell>
-                        </TableRow>
-                      )}
-                      {selectedPlanet.info.diameter && (
-                        <TableRow>
-                          <TableCell className="py-1 text-gray-300 text-xs">Diameter</TableCell>
-                          <TableCell className="py-1 font-mono text-sm text-white">{selectedPlanet.info.diameter}</TableCell>
-                        </TableRow>
-                      )}
-                      {selectedPlanet.info.temperature && (
-                        <TableRow>
-                          <TableCell className="py-1 text-gray-300 text-xs">Temperature</TableCell>
-                          <TableCell className="py-1 font-mono text-sm text-white">{selectedPlanet.info.temperature}</TableCell>
-                        </TableRow>
-                      )}
-                      {selectedPlanet.info.moons !== undefined && (
-                        <TableRow>
-                          <TableCell className="py-1 text-gray-300 text-xs">Moons</TableCell>
-                          <TableCell className="py-1 font-mono text-sm text-white">{selectedPlanet.info.moons}</TableCell>
-                        </TableRow>
-                      )}
-                    </TableBody>
-                  </Table>
-                </TabsContent>
-                <TabsContent value="orbital" className="pt-2">
-                  <Table>
-                    <TableBody>
-                      {selectedPlanet.info.dayLength && (
-                        <TableRow>
-                          <TableCell className="py-1 text-gray-300 text-xs">Day Length</TableCell>
-                          <TableCell className="py-1 font-mono text-sm text-white">{selectedPlanet.info.dayLength}</TableCell>
-                        </TableRow>
-                      )}
-                      {selectedPlanet.info.yearLength && (
-                        <TableRow>
-                          <TableCell className="py-1 text-gray-300 text-xs">Year Length</TableCell>
-                          <TableCell className="py-1 font-mono text-sm text-white">{selectedPlanet.info.yearLength}</TableCell>
-                        </TableRow>
-                      )}
-                      <TableRow>
-                        <TableCell className="py-1 text-gray-300 text-xs">Orbital Distance</TableCell>
-                        <TableCell className="py-1 font-mono text-sm text-white">{selectedPlanet.orbitalDistance.toFixed(1)} AU</TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className="py-1 text-gray-300 text-xs">Orbital Speed</TableCell>
-                        <TableCell className="py-1 font-mono text-sm text-white">{selectedPlanet.orbitalSpeed.toFixed(4)} rad/s</TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </TabsContent>
-              </Tabs>
-            </CardContent>
+          <Card className="p-4 space-y-4 bg-black/20 backdrop-blur-md border-zinc-800">
+            <div className="flex justify-between items-center">
+              <h3 className="text-xl font-semibold text-white">
+                {selectedPlanet.name}
+              </h3>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={onCloseInfo}
+                className="text-zinc-400 hover:text-white"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+
+            <Accordion type="single" collapsible className="w-full">
+              <AccordionItem value="details" className="border-zinc-800">
+                <AccordionTrigger className="text-sm text-zinc-200 hover:text-white">
+                  Details
+                </AccordionTrigger>
+                <AccordionContent className="text-sm space-y-2 text-zinc-300">
+                  <p><span className="text-zinc-400">Mass:</span> {selectedPlanet.info.mass}</p>
+                  <p><span className="text-zinc-400">Diameter:</span> {selectedPlanet.info.diameter}</p>
+                  <p><span className="text-zinc-400">Day Length:</span> {selectedPlanet.info.dayLength}</p>
+                  <p><span className="text-zinc-400">Year Length:</span> {selectedPlanet.info.yearLength}</p>
+                  <p><span className="text-zinc-400">Temperature:</span> {selectedPlanet.info.temperature}</p>
+                  {selectedPlanet.info.moons !== undefined && (
+                    <p><span className="text-zinc-400">Moons:</span> {selectedPlanet.info.moons}</p>
+                  )}
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="description" className="border-zinc-800">
+                <AccordionTrigger className="text-sm text-zinc-200 hover:text-white">
+                  Description
+                </AccordionTrigger>
+                <AccordionContent className="text-sm text-zinc-300">
+                  {selectedPlanet.info.description}
+                </AccordionContent>
+              </AccordionItem>
+
+              {selectedPlanet.id === 'earth' && selectedPlanet.info.perihelionDates && (
+                <AccordionItem value="perihelion" className="border-zinc-800">
+                  <AccordionTrigger className="text-sm text-zinc-200 hover:text-white">
+                    Closest Approaches to Sun
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <ScrollArea className="h-[200px] rounded-md">
+                      <div className="space-y-2 p-2">
+                        {selectedPlanet.info.perihelionDates.map((date, index) => {
+                          const [month, day, year] = date.date
+                            .replace(',', '')
+                            .split(' ')
+                            .filter(part => part.length > 0);
+                          
+                          const monthNum = new Date(`${month} 1, 2000`).getMonth() + 1;
+                          const dayNum = parseInt(day);
+                          const yearNum = parseInt(year);
+                          
+                          return (
+                            <div 
+                              key={index} 
+                              className="text-sm text-zinc-300 border-b border-zinc-800 pb-2 cursor-pointer hover:bg-white/5 p-2 rounded transition-colors"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                const simulationTime = calculatePlanetPositions(yearNum, monthNum, dayNum);
+                                onDateChange(simulationTime);
+                              }}
+                            >
+                              <p className="font-medium">{date.date}</p>
+                              <p className="text-zinc-400 text-xs">Distance: {date.distance}</p>
+                              {date.description && (
+                                <p className="text-zinc-400 text-xs mt-1 italic">{date.description}</p>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </ScrollArea>
+                  </AccordionContent>
+                </AccordionItem>
+              )}
+            </Accordion>
           </Card>
         )}
       </div>
