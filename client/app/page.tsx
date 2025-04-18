@@ -133,7 +133,7 @@ const Home = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen bg-[#0B1026]">
-        <div className="text-center relative">
+        <div className="text-center relative flex items-center justify-center flex-col gap-2">
           <div className="w-20 h-20 border-4 border-blue-400/20 border-t-blue-500 rounded-full animate-spin mx-auto mb-6 shadow-lg shadow-blue-500/20"></div>
           <div className="absolute inset-0 pointer-events-none">
             <div className="w-20 h-20 mx-auto rounded-full bg-blue-500/10 blur-xl"></div>
