@@ -8,7 +8,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-An interactive 3D visualization of our solar system, built with modern web technologies. Experience the beauty of planetary motion and explore the celestial bodies in our cosmic neighborhood.
+An interactive 3D visualization of our solar system, built with modern web technologies.
 
 ## ✨ Features
 
